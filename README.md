@@ -58,6 +58,7 @@ these HubSpot internal property names:
 | Phone | `phone` | High — standard, and confirmed **required** on this form |
 | Practice / organization | `company` | High — standard |
 | Role | `jobtitle` | High — standard, but not part of the originally confirmed field list; confirmed **required** on this form |
+| State / region | `state` | High — standard HubSpot contact property |
 | Practice size | `practice_size` | **Low — custom property, name is a guess** |
 | Billing headache / notes | `message` | **Low — custom property, name is a guess** |
 
