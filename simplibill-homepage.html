@@ -870,6 +870,39 @@
   .pay-row .v { color: var(--paper); font-family: var(--f-mono); }
   .pay-row .k { color: var(--mute); font-family: var(--f-mono); text-transform: uppercase; font-size: 9px; letter-spacing: 0.06em; }
 
+  /* ============ APP & PORTAL FEATURES ============ */
+  .features { background: var(--ink-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .feature-card {
+    padding: 32px 28px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--ink);
+    transition: border-color 0.25s ease;
+  }
+  .feature-card:hover { border-color: var(--line-2); }
+  .feature-card .f-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(196, 255, 71, 0.1);
+    color: var(--lime);
+    margin-bottom: 20px;
+  }
+  .feature-card h4 {
+    font-family: var(--f-display);
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .feature-card p { color: var(--mute-2); font-size: 14px; line-height: 1.6; }
+
   /* ============ LIFECYCLE ============ */
   .lifecycle {
     padding: 120px 0;
@@ -1024,7 +1057,7 @@
   }
   .foot-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
     gap: 60px;
     margin-bottom: 60px;
   }
@@ -1253,6 +1286,7 @@
     .receipts-grid { grid-template-columns: 1fr; }
     .problem-line { display: none; }
     .pillars-grid { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
     .life-track { grid-template-columns: repeat(2, 1fr); }
     .ai-split { grid-template-columns: 1fr; gap: 40px; }
     .tb-card { grid-template-columns: 1fr; padding: 40px 32px; }
@@ -1268,6 +1302,114 @@
     section.sect, .lifecycle, .ai-section, .tb-section { padding: 80px 0; }
     .cta { padding: 100px 0; }
   }
+
+  /* ============ CAREERS SECTION ============ */
+  .careers-hero { padding: 100px 0 60px; }
+  .careers-hero .hero-inner { max-width: 760px; }
+  .careers-hero h1.hero-h { font-size: clamp(40px, 6vw, 72px); }
+  .careers-note {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    margin-top: 36px;
+  }
+  .careers-note .note-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.02em;
+    color: var(--mute-2); border: 1px solid var(--line-2);
+    background: rgba(18, 24, 20, 0.6); padding: 8px 14px; border-radius: 100px;
+  }
+  .careers-note .note-pill svg { flex-shrink: 0; color: var(--lime); }
+
+  .role-list { display: flex; flex-direction: column; gap: 16px; margin-top: 56px; }
+  .role-card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: linear-gradient(180deg, var(--ink-2), var(--ink));
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+  .role-card:hover { border-color: var(--line-2); }
+  .role-card[open] { border-color: rgba(196, 255, 71, 0.35); }
+  .role-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 26px 30px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+  }
+  .role-summary::-webkit-details-marker { display: none; }
+  .role-summary-left { display: flex; flex-direction: column; gap: 6px; }
+  .role-eyebrow {
+    font-family: var(--f-mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--mute);
+  }
+  .role-summary h3 {
+    font-family: var(--f-display); font-size: 23px; font-weight: 500;
+    letter-spacing: -0.02em; line-height: 1.15;
+  }
+  .role-chevron {
+    flex-shrink: 0; width: 34px; height: 34px; border-radius: 8px;
+    border: 1px solid var(--line-2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--mute-2);
+    transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+  .role-card[open] .role-chevron { transform: rotate(180deg); border-color: var(--lime-2); color: var(--lime); }
+  .role-body { padding: 0 30px 32px; }
+  .role-desc { color: var(--mute-2); font-size: 15px; line-height: 1.6; margin-bottom: 22px; max-width: 640px; }
+  .role-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+  .role-tag {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.03em;
+    color: var(--mute-2); border: 1px solid var(--line-2); background: var(--ink-3);
+    padding: 5px 11px; border-radius: 100px;
+  }
+  .role-controls {
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
+    padding-top: 22px; border-top: 1px dashed var(--line-2);
+  }
+  .role-controls .f-group { margin-bottom: 0; min-width: 220px; flex: 1 1 220px; }
+  .role-controls label {
+    display: block; font-family: var(--f-mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--mute); margin-bottom: 8px;
+  }
+  .role-controls select {
+    width: 100%; font-family: var(--f-body); font-size: 14px; color: var(--paper);
+    background: var(--ink-2); border: 1px solid var(--line-2); border-radius: 8px;
+    padding: 11px 13px; outline: none; appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1L5 5L9 1' stroke='%238B9A92' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat; background-position: right 13px center; padding-right: 32px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .role-controls select:focus { border-color: var(--lime-2); background: var(--ink-3); }
+  .role-controls select.error { border-color: var(--danger); }
+  .role-controls .apply-btn { flex-shrink: 0; white-space: nowrap; }
+
+  .file-drop { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .file-drop input[type="file"] { display: none; }
+  .file-name { font-size: 12px; color: var(--mute-2); font-family: var(--f-mono); }
+
+  .life-strip {
+    background: var(--ink-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .life-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px;
+  }
+  .life-card {
+    padding: 32px 28px; border: 1px solid var(--line); border-radius: 14px;
+    background: var(--ink);
+  }
+  .life-card .li-icon { color: var(--lime); margin-bottom: 18px; }
+  .life-card h4 { font-family: var(--f-display); font-size: 19px; font-weight: 500; margin-bottom: 10px; letter-spacing: -0.01em; }
+  .life-card p { color: var(--mute-2); font-size: 14px; line-height: 1.6; }
+
+  @media (max-width: 900px) {
+    .life-grid { grid-template-columns: 1fr; }
+    .role-summary { padding: 22px 20px; }
+    .role-body { padding: 0 20px 26px; }
+    .role-summary h3 { font-size: 19px; }
+    .role-controls .apply-btn { width: 100%; justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -1282,6 +1424,7 @@
       <li><a href="#platform">Platform</a></li>
       <li><a href="#how">How it works</a></li>
       <li><a href="#ai">Intelligence</a></li>
+      <li><a href="#careers">Careers</a></li>
     </ul>
     <div class="nav-cta">
       <a href="#" class="btn btn-primary" data-open-demo>Request demo</a>
@@ -1299,6 +1442,7 @@
       <a class="nav-link" href="#platform">Platform</a>
       <a class="nav-link" href="#how">How it works</a>
       <a class="nav-link" href="#ai">Intelligence</a>
+      <a class="nav-link" href="#careers">Careers</a>
       <a href="#" class="btn btn-primary" data-open-demo>Request demo</a>
     </div>
   </div>
@@ -1589,6 +1733,62 @@
   </div>
 </section>
 
+<!-- ============ APP & PORTAL FEATURES ============ -->
+<section class="sect features" id="features">
+  <div class="container">
+    <div class="sect-head reveal">
+      <span class="sect-eyebrow">App &amp; portal</span>
+      <h2 class="sect-h">SimpliBill app &amp; portal <span class="italic">features.</span></h2>
+      <p class="sect-sub">Powering smarter, more efficient revenue cycle management. SimpliBill combines powerful technology with an intuitive cloud-based platform to help healthcare organizations streamline revenue cycle operations, improve visibility, and make better-informed decisions.</p>
+    </div>
+    <div class="feature-grid reveal">
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 21h8M12 18v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h4>Secure, Cloud-Based Access</h4>
+        <p>Access your revenue cycle data securely from anywhere, anytime. SimpliBill provides a reliable, cloud-based environment designed to keep your information accessible and protected.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V10M12 19V5M20 19v-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h4>Real-Time Dashboard</h4>
+        <p>Get a clear, up-to-date view of your operations with real-time dashboards that put critical performance metrics and workflow activity at your fingertips.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h4>Claims Management</h4>
+        <p>Streamline the claims lifecycle with tools designed to improve claim visibility, identify issues, and help your team manage claims more efficiently.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h4>Payment Management</h4>
+        <p>Simplify payment tracking and management with centralized visibility into payments, transactions, and outstanding balances.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="18" cy="7" r="2" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h4>Analytics &amp; Reporting</h4>
+        <p>Turn your revenue cycle data into actionable insights. Access powerful analytics and customizable reports to monitor performance, identify trends, and support better business decisions.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h4>Customizable Workflows</h4>
+        <p>Configure workflows around the way your organization operates. SimpliBill helps teams standardize processes, improve accountability, and reduce unnecessary manual work.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="f-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg></div>
+        <h4>Patient Engagement</h4>
+        <p>Support a better patient experience with tools designed to improve communication, simplify interactions, and keep patients informed throughout the revenue cycle.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ============ LIFECYCLE ============ -->
 <section class="lifecycle" id="how">
   <div class="container">
@@ -1725,6 +1925,495 @@
   </div>
 </section>
 
+<!-- ============ CAREERS ============ -->
+<section id="careers">
+  <section class="hero careers-hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container hero-inner">
+      <span class="eyebrow"><span class="dot"></span>We're hiring</span>
+      <h1 class="hero-h">Help us build the <span class="italic">prevention layer</span> for healthcare billing.</h1>
+      <p class="hero-sub">SimpliBill is a small, fast-moving RCM team with people in Chicago and Sri Lanka, working one shared CST schedule. Below are our open roles — pick a level, tell us about yourself, and apply.</p>
+      <div class="careers-note">
+        <span class="note-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          Based in or able to work from Chicago, IL or Sri Lanka
+        </span>
+        <span class="note-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Core hours align with CST
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" id="openings" style="padding-top: 40px;">
+    <div class="container">
+      <div class="sect-head reveal">
+        <span class="sect-eyebrow">Open roles</span>
+        <h2 class="sect-h">Find where you <span class="italic">fit in.</span></h2>
+        <p class="sect-sub">Choose the experience level you're applying at for each role — we review every level, from intern to senior.</p>
+      </div>
+
+      <div class="role-list">
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Technology</span>
+              <h3>IT Engineer</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Keep the infrastructure behind our RCM platform running — systems administration, integrations, internal tooling, and support across both office locations.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="IT Engineer">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="IT Engineer" data-dept="Technology">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>RCM Analyst</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Dig into claims, denials, and AR data to spot patterns before they cost our clients money. You'll work closely with billers and the product team on what to fix next.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="RCM Analyst">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="RCM Analyst" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Client Success</span>
+              <h3>Account Manager</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Own the relationship with a book of client practices — regular check-ins, escalation handling, and making sure they see the value SimpliBill is catching for them.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Account Manager">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Account Manager" data-dept="Client Success">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Product</span>
+              <h3>Product Manager</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Shape the roadmap for the platform's rule engine, dashboards, and workflows — working directly with engineering and the billers who use it every day.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Product Manager">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Product Manager" data-dept="Product">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">People Ops</span>
+              <h3>HR Executive</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Support hiring, onboarding, and day-to-day people operations across both offices. A great entry point into HR at a fast-growing company.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Junior level only</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="HR Executive">
+                  <option value="Junior">Junior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="HR Executive" data-dept="People Ops">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>Biller</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Prepare and submit clean claims, work rejections quickly, and keep charge entry accurate. Precision and a sense of urgency matter more than years of experience.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Biller">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Biller" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>Medical Coder</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Translate clinical documentation into accurate ICD-10/CPT codes, and flag documentation gaps before they turn into denials.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Medical Coder">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Medical Coder" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>Payment Posting Specialist</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Post ERA/EOB payments accurately and reconcile variances daily, keeping our clients' books trustworthy in real time.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Payment Posting Specialist">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Payment Posting Specialist" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>AR Follow-up Specialist</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Chase down aging claims with payers, resolve underpayments, and keep days-in-AR moving in the right direction.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="AR Follow-up Specialist">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="AR Follow-up Specialist" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>Denial Management Specialist</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Investigate denial root causes, file appeals, and feed patterns back to the team building our prevention rules.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Denial Management Specialist">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Denial Management Specialist" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Revenue Cycle</span>
+              <h3>Credentialing Specialist</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Manage provider enrollment and payer credentialing end-to-end, keeping expirations and re-credentialing on schedule.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Credentialing Specialist">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Credentialing Specialist" data-dept="Revenue Cycle">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Client Success</span>
+              <h3>Client Onboarding Specialist</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Guide new practices through implementation — data migration, system setup, and training — so go-live feels effortless.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="Client Onboarding Specialist">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="Client Onboarding Specialist" data-dept="Client Success">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+        <details class="role-card">
+          <summary class="role-summary">
+            <div class="role-summary-left">
+              <span class="role-eyebrow">Compliance</span>
+              <h3>QA &amp; Compliance Analyst</h3>
+            </div>
+            <span class="role-chevron">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5L7 10L12 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </summary>
+          <div class="role-body">
+            <p class="role-desc">Audit claims and workflows for accuracy and compliance, and help keep SimpliBill's rule engine honest.</p>
+            <div class="role-tags">
+              <span class="role-tag">Chicago, IL / Sri Lanka</span>
+              <span class="role-tag">CST hours</span>
+              <span class="role-tag">Full-time</span>
+            </div>
+            <div class="role-controls">
+              <div class="f-group">
+                <label>Experience level</label>
+                <select data-level-for="QA & Compliance Analyst">
+                  <option value="">Select a level</option>
+                  <option>Intern</option>
+                  <option>Junior</option>
+                  <option>Mid-level</option>
+                  <option>Senior</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary apply-btn" data-role="QA & Compliance Analyst" data-dept="Compliance">Apply for this role</button>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="sect life-strip" id="life">
+    <div class="container">
+      <div class="sect-head reveal">
+        <span class="sect-eyebrow">Why SimpliBill</span>
+        <h2 class="sect-h">One team, <span class="italic">two time zones.</span></h2>
+        <p class="sect-sub">We keep the team small and the hours shared, so Chicago and Sri Lanka work like one office instead of two.</p>
+      </div>
+      <div class="life-grid">
+        <div class="life-card">
+          <div class="li-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <h4>One shared schedule</h4>
+          <p>Everyone works CST hours, wherever they're based — no handoffs lost overnight.</p>
+        </div>
+        <div class="life-card">
+          <div class="li-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg></div>
+          <h4>Two hubs, one team</h4>
+          <p>Chicago and Sri Lanka aren't satellite offices — they're both home base.</p>
+        </div>
+        <div class="life-card">
+          <div class="li-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v14H8l-4 4V4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+          <h4>Real ownership, early</h4>
+          <p>Interns and juniors ship real work in front of real clients, not busywork.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="container">
@@ -1754,18 +2443,8 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#">Security</a></li>
-          <li><a href="#">Careers</a></li>
+          <li><a href="#careers">Careers</a></li>
           <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h5>Resources</h5>
-        <ul>
-          <li><a href="#">Documentation</a></li>
-          <li><a href="#">Integrations</a></li>
-          <li><a href="#">Changelog</a></li>
-          <li><a href="#">Status</a></li>
-          <li><a href="#">Privacy</a></li>
         </ul>
       </div>
     </div>
@@ -1869,6 +2548,85 @@
   </div>
 </div>
 
+<!-- ============ APPLICATION MODAL ============ -->
+<div class="modal-overlay" id="applyModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
+    <button type="button" class="modal-close" id="applyClose" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="demo-form-wrap">
+      <div class="modal-eyebrow" id="applyModalDept">Department</div>
+      <h3 id="applyModalTitle">Apply — <span id="applyModalRole">Role</span></h3>
+      <p class="modal-sub">Applying as <strong id="applyModalLevel">—</strong>. Tell us a little about yourself and attach your resume.</p>
+
+      <form class="demo-form" id="applyForm" novalidate>
+        <div class="f-general-error" id="applyGeneralError">Please fill in the required fields below before submitting.</div>
+
+        <div class="f-row">
+          <div class="f-group">
+            <label>Full name</label>
+            <input type="text" name="fullName" required placeholder="Jane Doe">
+            <div class="f-err">Please enter your name.</div>
+          </div>
+          <div class="f-group">
+            <label>Email</label>
+            <input type="email" name="email" required placeholder="jane@email.com">
+            <div class="f-err">Please enter a valid email.</div>
+          </div>
+        </div>
+
+        <div class="f-group">
+          <label>Phone <span class="opt">(optional)</span></label>
+          <input type="tel" name="phone" placeholder="+1 (312) 555-0100">
+        </div>
+
+        <div class="f-group">
+          <label>Tell us a bit about yourself — why should we hire you?</label>
+          <textarea name="aboutYou" required placeholder="Walk us through your background and what makes you a great fit for this role."></textarea>
+          <div class="f-err">This field is required.</div>
+        </div>
+
+        <div class="f-group">
+          <label>What's one problem you're proud of solving?</label>
+          <textarea name="proudProblem" required placeholder="Tell us about a problem you helped solve, and how you went about it."></textarea>
+          <div class="f-err">This field is required.</div>
+        </div>
+
+        <div class="f-group">
+          <label>Resume</label>
+          <div class="file-drop">
+            <button type="button" class="btn btn-ghost" id="resumeBtn">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1V9M7 9L4 6M7 9L10 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M1 10.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Add resume
+            </button>
+            <input type="file" name="resume" id="resumeInput" accept=".pdf,.doc,.docx" required>
+            <span class="file-name" id="resumeFileName">No file selected</span>
+          </div>
+          <div class="f-err" id="resumeErr">Please attach your resume.</div>
+        </div>
+
+        <input type="hidden" name="role" id="applyFieldRole">
+        <input type="hidden" name="department" id="applyFieldDept">
+        <input type="hidden" name="level" id="applyFieldLevel">
+
+        <button type="submit" class="btn btn-primary f-submit" id="applySubmitBtn">
+          <span class="spinner"></span>Submit application
+        </button>
+        <p class="f-note">This form is a UI preview only — it isn't connected to a live inbox or applicant tracking system yet.</p>
+      </form>
+
+      <div class="demo-success" id="applySuccess">
+        <div class="s-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Application received</h3>
+        <p>Thanks for applying to SimpliBill — this is a design preview, so nothing was actually sent yet. Once this form is wired up, you'll see a real confirmation here.</p>
+        <button type="button" class="btn btn-ghost" id="applyAnotherBtn" style="width:100%; justify-content:center;">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   const modal = document.getElementById('demoModal');
   const modalBox = modal.querySelector('.modal');
@@ -1908,6 +2666,17 @@
     navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
   mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const targetId = a.getAttribute('href').slice(1);
+      const target = targetId && document.getElementById(targetId);
+      if (!target) return;
+      e.preventDefault();
+      closeMobileMenu();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 
   const talkToSalesBtn = document.getElementById('talkToSalesBtn');
   if (talkToSalesBtn) {
@@ -2068,6 +2837,119 @@
     });
   }, { threshold: 0.4 });
   document.querySelectorAll('[data-count-to]').forEach(el => countIo.observe(el));
+
+  // ---- careers: application modal ----
+  const applyModal = document.getElementById('applyModal');
+  const applyModalBox = applyModal.querySelector('.modal');
+  const applyForm = document.getElementById('applyForm');
+  const applyGeneralError = document.getElementById('applyGeneralError');
+  const resumeInput = document.getElementById('resumeInput');
+  const resumeBtn = document.getElementById('resumeBtn');
+  const resumeFileName = document.getElementById('resumeFileName');
+  const resumeErr = document.getElementById('resumeErr');
+  const applySubmitBtn = document.getElementById('applySubmitBtn');
+
+  let applyLastFocused = null;
+
+  function openApplyModal(role, dept, level) {
+    document.getElementById('applyModalRole').textContent = role;
+    document.getElementById('applyModalDept').textContent = dept || 'Open role';
+    document.getElementById('applyModalLevel').textContent = level;
+    document.getElementById('applyFieldRole').value = role;
+    document.getElementById('applyFieldDept').value = dept || '';
+    document.getElementById('applyFieldLevel').value = level;
+
+    applyForm.reset();
+    resumeFileName.textContent = 'No file selected';
+    applyModalBox.classList.remove('submitted');
+    applyGeneralError.classList.remove('show');
+    applyForm.querySelectorAll('.f-group.error').forEach(g => g.classList.remove('error'));
+
+    applyLastFocused = document.activeElement;
+    applyModal.classList.add('open');
+    applyModal.setAttribute('aria-hidden', 'false');
+    setTimeout(() => applyForm.querySelector('input[name="fullName"]')?.focus(), 50);
+  }
+
+  function closeApplyModal() {
+    applyModal.classList.remove('open');
+    applyModal.setAttribute('aria-hidden', 'true');
+    if (applyLastFocused) applyLastFocused.focus();
+  }
+
+  document.querySelectorAll('.apply-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const role = btn.getAttribute('data-role');
+      const dept = btn.getAttribute('data-dept');
+      const roleBody = btn.closest('.role-body');
+      const select = roleBody.querySelector('select');
+      const level = select.value;
+
+      if (!level) {
+        select.classList.add('error');
+        select.focus();
+        return;
+      }
+      select.classList.remove('error');
+      openApplyModal(role, dept, level);
+    });
+  });
+
+  document.getElementById('applyClose').addEventListener('click', closeApplyModal);
+  document.getElementById('applyAnotherBtn').addEventListener('click', closeApplyModal);
+  applyModal.addEventListener('click', (e) => { if (e.target === applyModal) closeApplyModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && applyModal.classList.contains('open')) closeApplyModal();
+  });
+
+  resumeBtn.addEventListener('click', () => resumeInput.click());
+  resumeInput.addEventListener('change', () => {
+    if (resumeInput.files && resumeInput.files.length) {
+      resumeFileName.textContent = resumeInput.files[0].name;
+      resumeInput.closest('.f-group').classList.remove('error');
+      resumeErr.style.display = 'none';
+    } else {
+      resumeFileName.textContent = 'No file selected';
+    }
+  });
+
+  applyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    applyForm.querySelectorAll('.f-group').forEach(g => g.classList.remove('error'));
+    applyGeneralError.classList.remove('show');
+    resumeErr.style.display = 'none';
+
+    ['fullName', 'email', 'aboutYou', 'proudProblem'].forEach(name => {
+      const field = applyForm.querySelector(`[name="${name}"]`);
+      if (!field.value.trim()) {
+        field.closest('.f-group').classList.add('error');
+        valid = false;
+      }
+    });
+    if (!resumeInput.files || !resumeInput.files.length) {
+      resumeErr.style.display = 'block';
+      valid = false;
+    }
+
+    if (!valid) {
+      applyGeneralError.classList.add('show');
+      return;
+    }
+
+    applySubmitBtn.setAttribute('disabled', 'true');
+
+    // NOTE for developer: this is where the real submission call goes —
+    // e.g. POST the FormData (including resume) to your ATS / email endpoint.
+    const payload = Object.fromEntries(new FormData(applyForm).entries());
+    console.log('Application preview payload (no backend wired yet):', payload);
+
+    setTimeout(() => {
+      applySubmitBtn.removeAttribute('disabled');
+      applyModalBox.classList.add('submitted');
+    }, 500);
+  });
 </script>
 </body>
 </html>
