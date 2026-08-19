@@ -2,18 +2,22 @@
 
 Marketing homepage for SimpliBill — a prevention-first practice management and billing platform.
 
-Single self-contained HTML file. No build step, no dependencies, no framework.
+Two self-contained HTML files, each with its markup, CSS, and JS inlined. No build step,
+no dependencies, no framework, no shared includes between the two — each page duplicates
+the design-system CSS and nav/footer/demo-modal markup on its own.
 
 ## Structure
 
-Everything (markup, CSS, and JS) lives in one file: `simplibill-homepage.html`. This includes:
-
-- Hero with an animated claim-pipeline demo (CSS keyframe animation)
-- Problem section with scroll-triggered stat reveals
-- Product pillars, lifecycle, and AI/human sections
-- "Receipts" section with count-up animated stats
-- A "Book a demo" modal with client-side validation
-- Scroll-reveal animations via a small vanilla JS `IntersectionObserver`
+- **`simplibill-homepage.html`** — the marketing site:
+  - Hero with an animated claim-pipeline demo (CSS keyframe animation)
+  - Problem section with scroll-triggered stat reveals
+  - Product pillars, lifecycle, and AI/human sections
+  - "Receipts" section with count-up animated stats
+  - A "Book a demo" modal with client-side validation
+  - Scroll-reveal animations via a small vanilla JS `IntersectionObserver`
+- **`careers.html`** — open roles and the "Apply for this role" flow, linked from the nav's
+  "Careers" item on both pages. Since the pages don't share includes, updating shared
+  pieces (design tokens, nav links, the demo modal) means editing both files.
 
 ## Running it locally
 
@@ -79,11 +83,31 @@ To point the form at a different HubSpot form/portal, change the two ID constant
 above. To swap in a different provider entirely (FormSubmit, EmailJS, a real
 backend, etc.), replace the `fetch()` call in the form's `submit` event listener.
 
+## The careers "Apply for this role" form
+
+Applications post directly to [FormSubmit](https://formsubmit.co/), which emails the
+submission (including the attached resume) to `hr@simplibill.io` — no backend required.
+
+```js
+const APPLY_ENDPOINT = 'https://formsubmit.co/hr@simplibill.io';
+```
+
+**One-time activation step:** the first submission FormSubmit receives for a new
+target address triggers a confirmation email to that address. Someone with access to
+`hr@simplibill.io` needs to click the activation link in that email before further
+applications will actually be delivered.
+
+To point applications at a different address, change `APPLY_ENDPOINT`. To swap in a
+real ATS (Greenhouse, Lever, etc.), replace the `fetch()` call in the apply form's
+`submit` event listener.
+
 ## Deploying
 
-This is a static file, so it works as-is on GitHub Pages, Netlify, Vercel, S3,
-or any static host. For GitHub Pages specifically, rename the file to `index.html`
-at the repo root and enable Pages in the repo settings.
+These are static files, so they work as-is on GitHub Pages, Netlify, Vercel, S3,
+or any static host — deploy both `simplibill-homepage.html` and `careers.html` together
+so the "Careers" nav link resolves. For GitHub Pages specifically, rename
+`simplibill-homepage.html` to `index.html` at the repo root (leave `careers.html` as
+`careers.html`) and enable Pages in the repo settings.
 
 ## License
 
