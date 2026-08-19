@@ -2,9 +2,10 @@
 
 Marketing homepage for SimpliBill — a prevention-first practice management and billing platform.
 
-Two self-contained HTML files, each with its markup, CSS, and JS inlined. No build step,
-no dependencies, no framework, no shared includes between the two — each page duplicates
-the design-system CSS and nav/footer/demo-modal markup on its own.
+Four self-contained HTML files, each with its markup, CSS, and JS inlined. No build step,
+no framework, no shared includes between them — each page duplicates the design-system
+CSS and nav/footer/demo-modal markup on its own. The blog and admin pages are the one
+exception to "no dependencies": they talk to a Supabase project over `fetch()` (see below).
 
 ## Structure
 
@@ -15,9 +16,14 @@ the design-system CSS and nav/footer/demo-modal markup on its own.
   - "Receipts" section with count-up animated stats
   - A "Book a demo" modal with client-side validation
   - Scroll-reveal animations via a small vanilla JS `IntersectionObserver`
-- **`careers.html`** — open roles and the "Apply for this role" flow, linked from the nav's
-  "Careers" item on both pages. Since the pages don't share includes, updating shared
-  pieces (design tokens, nav links, the demo modal) means editing both files.
+- **`careers.html`** — open roles and the "Apply for this role" flow.
+- **`blog.html`** — public post list and article view, backed by Supabase.
+- **`admin.html`** — password-gated post editor (create/edit/delete/publish), also backed
+  by Supabase. Not linked from anywhere except the nav — there's no public signup here.
+
+All four pages link to each other from the nav's Platform/How it works/Intelligence/
+Services/Careers/Blog items. Since the pages don't share includes, updating shared pieces
+(design tokens, nav links, the demo modal) means editing all four files.
 
 ## Running it locally
 
@@ -101,13 +107,60 @@ To point applications at a different address, change `APPLY_ENDPOINT`. To swap i
 real ATS (Greenhouse, Lever, etc.), replace the `fetch()` call in the apply form's
 `submit` event listener.
 
+## The blog and admin pages (Supabase)
+
+`blog.html` (public) and `admin.html` (post editor) both talk directly to a Supabase
+project's auto-generated REST API and Auth endpoints via `fetch()` — no server, no SDK.
+Right now they point at placeholder values:
+
+```js
+const SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
+```
+
+**One-time setup:**
+
+1. Create a free project at [supabase.com](https://supabase.com).
+2. In the SQL Editor, run [`supabase-schema.sql`](./supabase-schema.sql) — it creates the
+   `articles` table and the row-level-security policies (public can read published posts
+   only; signed-in users can read/write everything, including drafts).
+3. In **Authentication → Users**, manually create one user per admin (email + password).
+   There is no public sign-up flow anywhere on the site — accounts only get created here.
+4. In **Project Settings → API**, copy the Project URL and the `anon` public key, and
+   paste them into the two constants above in *both* `blog.html` and `admin.html`.
+
+**How it works:**
+
+- `blog.html` lists posts where `published = true` (anonymous reads, via the `anon` key)
+  and renders a single post at `blog.html?post=<slug>`.
+- `admin.html` signs in against Supabase Auth (`/auth/v1/token?grant_type=password`),
+  keeps the access token in `sessionStorage` (cleared when the tab closes), and uses it
+  to list/create/update/delete rows in `articles` — including unpublished drafts, which
+  the public page can't see.
+- Article bodies are stored and rendered as plain text (rendered via `textContent`, not
+  raw HTML, to avoid XSS) with line breaks preserved via CSS `white-space: pre-wrap`. No
+  markdown rendering — if you want that, it's a small addition to the `renderArticle()`
+  function in `blog.html`.
+- Cover images are a plain URL field, not a file upload — anyone editing a post pastes a
+  hosted image URL. Adding real image uploads would mean wiring up Supabase Storage,
+  which isn't done here.
+
 ## Deploying
 
 These are static files, so they work as-is on GitHub Pages, Netlify, Vercel, S3,
-or any static host — deploy both `simplibill-homepage.html` and `careers.html` together
-so the "Careers" nav link resolves. For GitHub Pages specifically, rename
-`simplibill-homepage.html` to `index.html` at the repo root (leave `careers.html` as
-`careers.html`) and enable Pages in the repo settings.
+or any static host — deploy all four HTML files together so the nav links resolve.
+Do the Supabase setup above before (or right after) launch, or `blog.html`/`admin.html`
+will just show "could not load posts."
+
+**Vercel:** no filename changes needed. [`vercel.json`](./vercel.json) rewrites `/` to
+`/simplibill-homepage.html` so the bare domain serves the homepage instead of 404ing;
+`careers.html`, `blog.html`, and `admin.html` are already reachable at their own paths
+with no extra config. Just import the repo in Vercel with framework preset "Other" (or
+no preset) — there's no build step to run.
+
+**GitHub Pages:** doesn't support rewrites the same way, so instead rename
+`simplibill-homepage.html` to `index.html` at the repo root (leave the other three
+filenames as-is) and enable Pages in the repo settings.
 
 ## License
 
