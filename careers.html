@@ -2087,7 +2087,8 @@
       <h3 id="applyModalTitle">Apply — <span id="applyModalRole">Role</span></h3>
       <p class="modal-sub">Applying as <strong id="applyModalLevel">—</strong>. Tell us a little about yourself and attach your resume.</p>
 
-      <form class="demo-form" id="applyForm" novalidate>
+      <form class="demo-form" id="applyForm" novalidate
+        action="https://formsubmit.co/hr@simplibill.io" method="POST" enctype="multipart/form-data" target="applyFrame">
         <div class="f-general-error" id="applyGeneralError">Please fill in the required fields below before submitting.</div>
 
         <div class="f-row">
@@ -2136,12 +2137,16 @@
         <input type="hidden" name="role" id="applyFieldRole">
         <input type="hidden" name="department" id="applyFieldDept">
         <input type="hidden" name="level" id="applyFieldLevel">
+        <input type="hidden" name="_subject" id="applyFieldSubject">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
 
         <button type="submit" class="btn btn-primary f-submit" id="applySubmitBtn">
           <span class="spinner"></span>Submit application
         </button>
         <p class="f-note">A real person will review your application — we'll follow up within a few business days.</p>
       </form>
+      <iframe name="applyFrame" id="applyFrame" style="display:none" title="application submission target"></iframe>
 
       <div class="demo-success" id="applySuccess">
         <div class="s-icon">
@@ -2443,10 +2448,14 @@
 
   // First submission triggers a FormSubmit confirmation email to hr@simplibill.io —
   // someone needs to click the activation link there before submissions come through.
-  const APPLY_ENDPOINT = 'https://formsubmit.co/hr@simplibill.io';
+  //
+  // The form posts as a genuine multipart/form-data submission into a hidden iframe
+  // (rather than fetch()) because FormSubmit only reliably attaches uploaded files
+  // on a real form POST — its JSON/AJAX response path drops file attachments even
+  // though the other fields come through fine.
+  const applyFrame = document.getElementById('applyFrame');
 
   applyForm.addEventListener('submit', (e) => {
-    e.preventDefault();
     let valid = true;
 
     applyForm.querySelectorAll('.f-group').forEach(g => g.classList.remove('error'));
@@ -2466,33 +2475,23 @@
     }
 
     if (!valid) {
+      e.preventDefault();
       applyGeneralError.classList.add('show');
       return;
     }
 
+    const role = document.getElementById('applyFieldRole').value;
+    document.getElementById('applyFieldSubject').value = `New application: ${role}`;
+
     applySubmitBtn.setAttribute('disabled', 'true');
 
-    const role = document.getElementById('applyFieldRole').value;
-    const formData = new FormData(applyForm);
-    formData.append('_subject', `New application: ${role}`);
-    formData.append('_captcha', 'false');
-    formData.append('_template', 'table');
+    applyFrame.addEventListener('load', () => {
+      applyModalBox.classList.add('submitted');
+      applySubmitBtn.removeAttribute('disabled');
+    }, { once: true });
 
-    fetch(APPLY_ENDPOINT, {
-      method: 'POST',
-      headers: { Accept: 'application/json' },
-      body: formData,
-    })
-      .then(res => {
-        if (!res.ok) throw new Error('Request failed');
-        applyModalBox.classList.add('submitted');
-      })
-      .catch(() => {
-        applyGeneralError.classList.add('show');
-      })
-      .finally(() => {
-        applySubmitBtn.removeAttribute('disabled');
-      });
+    // form submits natively from here (not intercepted) so the browser sends a
+    // real multipart body — required for FormSubmit to attach the resume file.
   });
 </script>
 </body>
