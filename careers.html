@@ -1411,6 +1411,9 @@
     .role-controls .apply-btn { width: 100%; justify-content: center; }
   }
 </style>
+<!-- HubSpot tracking code — required so the hubspotutk cookie exists and form
+     submissions below can be linked to a visitor/contact record. -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/246830964.js"></script>
 </head>
 <body>
 
@@ -2275,6 +2278,8 @@
     const lastname = document.getElementById('fLastName').value.trim();
     const practice = document.getElementById('fPractice').value.trim();
 
+    const hutk = document.cookie.match(/(?:^|; )hubspotutk=([^;]+)/)?.[1];
+
     const payload = {
       fields: [
         { name: 'firstname', value: firstname },
@@ -2290,6 +2295,7 @@
       context: {
         pageUri: window.location.href,
         pageName: document.title,
+        ...(hutk ? { hutk } : {}),
       },
     };
 
