@@ -2,7 +2,7 @@
 
 Marketing homepage for SimpliBill — a prevention-first practice management and billing platform.
 
-Four self-contained HTML files, each with its markup, CSS, and JS inlined. No build step,
+Five self-contained HTML files, each with its markup, CSS, and JS inlined. No build step,
 no framework, no shared includes between them — each page duplicates the design-system
 CSS and nav/footer/demo-modal markup on its own. The blog and admin pages are the one
 exception to "no dependencies": they talk to a Supabase project over `fetch()` (see below).
@@ -17,13 +17,18 @@ exception to "no dependencies": they talk to a Supabase project over `fetch()` (
   - A "Book a demo" modal with client-side validation
   - Scroll-reveal animations via a small vanilla JS `IntersectionObserver`
 - **`careers.html`** — open roles and the "Apply for this role" flow.
+- **`conferences.html`** — upcoming/past events plus a "book time with us" form. Events
+  live in the `CONFERENCES` array and sort into Upcoming/Past by date automatically. The
+  printed booth QR code points at `https://www.simplibill.io/conferences.html`, so don't
+  rename this file. The booking form posts to the same HubSpot form as the demo modal
+  (hence the required phone/role fields), with the chosen event folded into `message`.
 - **`blog.html`** — public post list and article view, backed by Supabase.
 - **`admin.html`** — password-gated post editor (create/edit/delete/publish), also backed
   by Supabase. Not linked from anywhere except the nav — there's no public signup here.
 
 All four pages link to each other from the nav's Platform/How it works/Intelligence/
-Services/Careers/Blog items. Since the pages don't share includes, updating shared pieces
-(design tokens, nav links, the demo modal) means editing all four files.
+Services/Careers/Blog/Conferences items. Since the pages don't share includes, updating shared pieces
+(design tokens, nav links, the demo modal) means editing all five files.
 
 ## Running it locally
 
@@ -148,18 +153,18 @@ const SUPABASE_ANON_KEY = 'YOUR-ANON-PUBLIC-KEY';
 ## Deploying
 
 These are static files, so they work as-is on GitHub Pages, Netlify, Vercel, S3,
-or any static host — deploy all four HTML files together so the nav links resolve.
+or any static host — deploy all the HTML files together so the nav links resolve.
 Do the Supabase setup above before (or right after) launch, or `blog.html`/`admin.html`
 will just show "could not load posts."
 
 **Vercel:** no filename changes needed. [`vercel.json`](./vercel.json) rewrites `/` to
 `/simplibill-homepage.html` so the bare domain serves the homepage instead of 404ing;
-`careers.html`, `blog.html`, and `admin.html` are already reachable at their own paths
+`careers.html`, `conferences.html`, `blog.html`, and `admin.html` are already reachable at their own paths
 with no extra config. Just import the repo in Vercel with framework preset "Other" (or
 no preset) — there's no build step to run.
 
 **GitHub Pages:** doesn't support rewrites the same way, so instead rename
-`simplibill-homepage.html` to `index.html` at the repo root (leave the other three
+`simplibill-homepage.html` to `index.html` at the repo root (leave the other
 filenames as-is) and enable Pages in the repo settings.
 
 ## License

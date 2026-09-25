@@ -165,7 +165,7 @@
     border-top: 1px solid var(--line);
     transition: max-height 0.3s ease;
   }
-  .mobile-menu.open { max-height: 320px; }
+  .mobile-menu.open { max-height: 480px; }
   .mobile-menu-inner {
     padding: 16px 32px 24px;
     display: flex; flex-direction: column; gap: 4px;
@@ -1277,6 +1277,9 @@
   .modal.submitted .demo-success { display: block; }
 
   /* ============ RESPONSIVE ============ */
+  @media (max-width: 1100px) {
+    .nav-links { gap: 28px; }
+  }
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .nav-cta .btn { display: none; }
@@ -1427,6 +1430,7 @@
       <li><a href="#features">Services</a></li>
       <li><a href="careers.html">Careers</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="conferences.html">Conferences</a></li>
     </ul>
     <div class="nav-cta">
       <a href="#" class="btn btn-primary" data-open-demo>Request demo</a>
@@ -1447,6 +1451,7 @@
       <a class="nav-link" href="#features">Services</a>
       <a class="nav-link" href="careers.html">Careers</a>
       <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="conferences.html">Conferences</a>
       <a href="#" class="btn btn-primary" data-open-demo>Request demo</a>
     </div>
   </div>
@@ -1960,6 +1965,7 @@
           <li><a href="#">Security</a></li>
           <li><a href="careers.html">Careers</a></li>
           <li><a href="blog.html">Blog</a></li>
+          <li><a href="conferences.html">Conferences</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
       </div>
