@@ -20,8 +20,10 @@ exception to "no dependencies": they talk to a Supabase project over `fetch()` (
 - **`conferences.html`** — upcoming/past events plus a "book time with us" form. Events
   live in the `CONFERENCES` array and sort into Upcoming/Past by date automatically. The
   printed booth QR code points at `https://www.simplibill.io/conferences.html`, so don't
-  rename this file. The booking form posts to the same HubSpot form as the demo modal
-  (hence the required phone/role fields), with the chosen event folded into `message`.
+  rename this file. The booking form does **not** go to HubSpot: it emails
+  `info@simplibill.io` via FormSubmit (`BOOKING_ENDPOINT`). Like the careers form, the first
+  submission sends a one-time activation email to that address that must be clicked.
+  The demo modal on this page still posts to HubSpot.
 - **`blog.html`** — public post list and article view, backed by Supabase.
 - **`admin.html`** — password-gated post editor (create/edit/delete/publish), also backed
   by Supabase. Not linked from anywhere except the nav — there's no public signup here.

@@ -920,9 +920,8 @@
   const generalError = document.getElementById('fGeneralError');
   let lastFocused = null;
 
-  // Both forms on this page post to the same HubSpot form as the homepage demo
-  // request. That form requires firstname, lastname, email, phone and jobtitle
-  // (see README), which is why the booking form collects phone and role too.
+  // The demo modal posts to the same HubSpot form as the homepage. (The
+  // conference booking form emails info@simplibill.io instead - see below.)
   const HUBSPOT_PORTAL_ID = '246830964';
   const HUBSPOT_FORM_GUID = '757866e9-eebb-463a-8451-6d95e1a5c6a7';
   const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
@@ -1263,6 +1262,11 @@
   })();
 
   // ============ BOOKING FORM SUBMISSION ============
+  // Emailed to info@simplibill.io via FormSubmit (same service careers.html
+  // uses) - this form does NOT go to HubSpot. The first submission triggers a
+  // one-time activation email to info@simplibill.io; click the link in it or
+  // later submissions won't be delivered.
+  const BOOKING_ENDPOINT = 'https://formsubmit.co/ajax/info@simplibill.io';
   const bookingForm = document.getElementById('bookingForm');
   const bookingGeneralError = document.getElementById('bookingGeneralError');
   const bookingSubmitBtn = document.getElementById('bookingSubmitBtn');
@@ -1289,22 +1293,36 @@
     bookingSubmitBtn.setAttribute('disabled', 'true');
 
     const firstname = document.getElementById('bFirstName').value.trim();
+    const lastname = document.getElementById('bLastName').value.trim();
+    const email = document.getElementById('bEmail').value.trim();
     const eventName = eventSelect.value;
-    const noteValue = document.getElementById('bNote').value.trim();
-    // Fold the selected event into the message field so HubSpot doesn't need
-    // a custom "event" property. The "Conference meeting" prefix lets whoever
-    // triages the form tell these apart from homepage demo requests.
-    const combinedMessage = `Conference meeting request\nEvent: ${eventName}${noteValue ? "\n\nNote: " + noteValue : ""}`;
 
-    submitToHubSpot([
-      { name: 'firstname', value: firstname },
-      { name: 'lastname', value: document.getElementById('bLastName').value.trim() },
-      { name: 'email', value: document.getElementById('bEmail').value.trim() },
-      { name: 'phone', value: document.getElementById('bPhone').value.trim() },
-      { name: 'company', value: document.getElementById('bCompany').value.trim() },
-      { name: 'jobtitle', value: document.getElementById('bRole').value.trim() },
-      { name: 'message', value: combinedMessage },  // LOW CONFIDENCE - see README
-    ])
+    fetch(BOOKING_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        'Event': eventName,
+        'Name': `${firstname} ${lastname}`,
+        'Email': email,
+        'Phone': document.getElementById('bPhone').value.trim(),
+        'Practice / organization': document.getElementById('bCompany').value.trim(),
+        'Role': document.getElementById('bRole').value.trim(),
+        'Note': document.getElementById('bNote').value.trim() || '(none)',
+        'Page': window.location.href,
+        _subject: `Conference meeting request: ${eventName} - ${firstname} ${lastname}`,
+        _replyto: email,
+        _template: 'table',
+        _captcha: 'false',
+      }),
+    })
+      .then(async res => {
+        const data = await res.json().catch(() => ({}));
+        // FormSubmit returns 200 with { success: "false", message } on some failures
+        if (!res.ok || String(data.success) !== 'true') {
+          console.error('Booking submission failed:', data);
+          throw new Error(data.message || 'Request failed');
+        }
+      })
       .then(() => {
         document.getElementById('bookingSuccessCopy').textContent =
           `Thanks, ${firstname}. Someone from our team will follow up to find a time at ${eventName} that works.`;
